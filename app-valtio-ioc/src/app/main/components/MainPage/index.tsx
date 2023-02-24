@@ -9,6 +9,7 @@ const MainPageComponent = () => {
     const {name, count} = viewStore.useSnapshot();
     return (
         <div className={c.page}>
+            <div>{Math.random()}</div>
             <div>{name}</div>
             <div>{count}</div>
             <button

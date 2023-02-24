@@ -1,11 +1,10 @@
 import {observer} from 'mobx-react-lite';
 import {provider, useInstance} from 'react-ioc';
 
-import {ViewStore} from './ViewStore';
-import {MainPage} from './components/MainPage';
-import { Todos } from './components/Todos';
+import {Todos} from './Todos';
+import {CrudViewStore} from './ViewStore';
 
-const MainModule = provider(ViewStore)(
+const MainModule = provider(CrudViewStore)(
     //
     // Services available only within MainModule should be provided here
     //
@@ -13,8 +12,6 @@ const MainModule = provider(ViewStore)(
     observer(() => {
         return (
             <>
-                <MainPage />
-                <MainPage />
                 <Todos />
             </>
         );

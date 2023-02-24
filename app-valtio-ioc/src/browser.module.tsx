@@ -10,3 +10,5 @@ export const BrowserModule = provider(ThemeDataStore)(() => (
         <AppModule />
     </Theme>
 ));
+
+
