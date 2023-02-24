@@ -1,0 +1,41 @@
+.navigationRecord {
+    overflow: visible;
+    pointer-events: auto;
+    font-size: 14.5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: rgb(0 0 0 / 8%) 0px 6px 16px -8px, rgb(0 0 0 / 5%) 0px 9px 28px,
+        rgb(0 0 0 / 3%) 0px 12px 48px 16px;
+    margin: 10px;
+    border-radius: 5px;
+    padding: 20px 10px;
+    position: relative;
+    min-height: 60px;
+
+    .voiceAction {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .time {
+        margin-bottom: 10px;
+        text-align: center;
+        top: 4px;
+        font-size: 12px;
+    }
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .icon {
+            font-size: 40px;
+        }
+    }
+    .actionRow {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 20px;
+    }
+}
