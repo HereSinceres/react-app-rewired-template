@@ -7,7 +7,7 @@ interface TodoDTO {
 interface Api<T> {
     list: () => T[];
     details: (id: string) => T;
-    create: (todo: T) => void;
+    create: (todo: T) => T;
     update: (todo: T) => void;
     delete: (todo: T) => void;
 }
@@ -34,7 +34,8 @@ export abstract class CrudEF<T> {
     }
     create(atom: T) {
         if (this.api) {
-            this.api.create(atom);
+           const todo = this.api.create(atom);
+           this.state.list.push(todo);
         }
     }
     update(atom: T) {
@@ -60,8 +61,12 @@ export class CrudViewStore extends CrudEF<TodoDTO> {
         details: function (id: string): TodoDTO {
             throw new Error('Function not implemented.');
         },
-        create: function (todo: TodoDTO): void {
-            throw new Error('Function not implemented.');
+        create: function (todo: TodoDTO): TodoDTO {
+            return {
+                id: 1,
+                description: '2',
+                status: '21'
+            };
         },
         update: function (todo: TodoDTO): void {
             throw new Error('Function not implemented.');

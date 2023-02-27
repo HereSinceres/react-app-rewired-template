@@ -1,40 +1,31 @@
-// entities
-export class Spartan {
-    private name: string;
-    private kills: number;
-
-    constructor(name: string, kills: number) {
-        this.name = name;
-        this.kills = kills;
-    }
-}
-
+import {ApiClient} from './ApiClient';
 // repositories/interfaces
+
 export interface IWrite<T> {
     create(item: T): Promise<boolean>;
     update(id: string, item: T): Promise<boolean>;
     delete(id: string): Promise<boolean>;
 }
+
 export interface IRead<T> {
     find(item: T): Promise<T[]>;
     findOne(id: string): Promise<T>;
 }
- 
-interface ApiClient<T> {
-    list: () => T[];
-    details: (id: string) => T;
-    create: (todo: T) => T;
-    update: (todo: T) => void;
-    delete: (todo: T) => void;
-}
 
-// repositories/base
 export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
-    public readonly _apiClient: ApiClient<T>;
-    constructor(apiClient: ApiClient<T>) {
-        this._apiClient = apiClient;
+    protected  readonly apiClient: ApiClient<T> | undefined;
+
+    loading = false;
+    list: T[] = [];
+
+    get count() {
+        return this.list.length;
     }
-    create(item: T): Promise<boolean> {
+    async create(item: T): Promise<boolean> {
+        this.loading = true;
+        await this.apiClient?.create(item);
+        this.list.push(item);
+        this.loading = false;
         throw new Error('Method not implemented.');
     }
     update(id: string, item: T): Promise<boolean> {
@@ -49,11 +40,4 @@ export abstract class BaseRepository<T> implements IWrite<T>, IRead<T> {
     findOne(id: string): Promise<T> {
         throw new Error('Method not implemented.');
     }
-}
-
-export class SpartanRepository extends BaseRepository<Spartan> {
-    // here, we can create all especific stuffs of Spartan Repository
-    // countOfSpartans(): Promise<number> {
-    //     // return this._apiClient.count({});
-    // }
 }

@@ -5,12 +5,13 @@ import {FullPageFallbackProgress} from '@/app/common/components/FulPageFallbackP
 
 const MainModule = lazy(() => import('./main/main.module'));
 const CrudModule = lazy(() => import('./crud/crud.module'));
-export const AppModule = provider(
-)(() => { 
+const Crud2Module = lazy(() => import('./crud2/crud.module'));
+export const AppModule = provider()(() => {
     return (
         <Suspense fallback={<FullPageFallbackProgress />}>
-        <MainModule />
+            {/* <MainModule /> */}
             <CrudModule />
+            <Crud2Module />
         </Suspense>
     );
-}); 
+});
